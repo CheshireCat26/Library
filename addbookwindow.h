@@ -2,6 +2,7 @@
 #define ADDBOOKWINDOW_H
 
 #include <QMainWindow>
+#include <book.h>
 
 namespace Ui {
 class AddBookWindow;
@@ -22,12 +23,8 @@ private:
     Ui::AddBookWindow *ui;
 
 
-    void getData(QString& name, QString& author, QString& isbn,
-                 QString& topics, QString& description, int& year,
-                 int& id);
-    void sentDataToDB(QString& name, QString& author, QString& isbn,
-                 QString& topics, QString& description, int& year,
-                 int& id);
+    Book getData();
+    void AddBookInDB(Book& book);
 };
 
 #endif // ADDBOOKWINDOW_H

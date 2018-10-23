@@ -28,11 +28,13 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    addbookwindow.cpp
+    addbookwindow.cpp \
+    book.cpp
 
 HEADERS += \
         mainwindow.h \
-    addbookwindow.h
+    addbookwindow.h \
+    book.h
 
 FORMS += \
         mainwindow.ui \

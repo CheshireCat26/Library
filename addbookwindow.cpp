@@ -19,50 +19,43 @@ AddBookWindow::~AddBookWindow()
 
 void AddBookWindow::on_pushButtonAdd_clicked()
 {
-    QSqlQuery query;
-
-    QString name, author, isbn, topics, description;
-    int year, id;
-    getData(name, author, isbn, topics, description, year, id);
-
-
+    Book book = getData();
+    AddBookInDB(book);
 }
 
-void AddBookWindow::getData(QString& name, QString& author, QString& isbn,
-                            QString& topics, QString& description, int& year,
-                            int& id)
+Book AddBookWindow::getData()
 {
     QSqlQuery query;
 
-    name = ui->lineEditName->text();
-    author = ui->lineEditAuthor->text();
-    isbn = ui->lineEditISBN->text();
-    topics = ui->lineEditTopics->text();
-    description = ui->lineEditDecrtiption->text();
-    year = ui->lineEditYear->text().toInt();
-
+    QString name = ui->lineEditName->text();
+    QString author = ui->lineEditAuthor->text();
+    QString isbn = ui->lineEditISBN->text();
+    QString topics = ui->lineEditTopics->text();
+    QString description = ui->lineEditDecrtiption->text();
+    int year = ui->lineEditYear->text().toInt();
+    int id;
     query.exec("SELECT MAX(ID) FROM Book");
     if (query.next())
         id = query.value(0).toInt() + 1;
     else
         id = 0;
+
+    return Book(name, author, isbn, topics, description, year, id);
 }
 
-void  AddBookWindow::sentDataToDB (QString& name, QString& author, QString& isbn,
-                                   QString& topics, QString& description, int& year,
-                                   int& id)
+void  AddBookWindow::AddBookInDB (Book& book)
 {
     QSqlQuery query;
     query.prepare("INSERT INTO Book (Name, Author, ISBN, Topics, Description, Year, ID) "
                   "VALUES (:name, :author, :isbn, :topics, "
                   ":description, :year, :id)");
-    query.bindValue(":name", name);
-    query.bindValue(":author", author);
-    query.bindValue(":isbn", isbn);
-    query.bindValue(":topics", topics);
-    query.bindValue(":description", description);
-    query.bindValue(":year", year);
-    query.bindValue(":id", id);
+    query.bindValue(":name", book.getName());
+    query.bindValue(":author", book.getAuthor());
+    query.bindValue(":isbn", book.getIsbn());
+    query.bindValue(":topics", book.getTopics());
+    query.bindValue(":description", book.getTopics());
+    query.bindValue(":year", book.getYear());
+    query.bindValue(":id", book.getId());
     if(!query.exec())
     {
         QSqlError error = query.lastError();
