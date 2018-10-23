@@ -4,10 +4,20 @@
 #include <QMessageBox>
 
 static QSqlDatabase db;
+void connectInDB();
 
 int main(int argc, char *argv[])
 {
+    connectInDB();
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
 
+    return a.exec();
+}
+
+void connectInDB()
+{
     db = QSqlDatabase::addDatabase("QODBC");
     db.setDatabaseName("DRIVER={SQL Server};SERVER=DESKTOP-L9PSBQ7\\MSSQLSERVER11;DATABASE=Library;Trusted_Connection=yes;");
     db.setUserName("DESKTOP-L9PSBQ7\\nail1");
@@ -19,12 +29,5 @@ int main(int argc, char *argv[])
                           QMessageBox::Ok);
 
         dbErr.exec();
-        return 1;
      }
-
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
-
-    return a.exec();
 }
