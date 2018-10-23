@@ -35,7 +35,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>Книги</string>
+          <string>Книги:</string>
          </property>
          <property name="textFormat">
           <enum>Qt::AutoText</enum>
@@ -78,7 +78,7 @@
        <item>
         <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>Читатели</string>
+          <string>Читатели:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
