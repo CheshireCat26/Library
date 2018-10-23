@@ -21,6 +21,7 @@ void AddBookWindow::on_pushButtonAdd_clicked()
 {
     Book book = getData();
     AddBookInDB(book);
+    this->close();
 }
 
 Book AddBookWindow::getData()
@@ -31,7 +32,7 @@ Book AddBookWindow::getData()
     QString author = ui->lineEditAuthor->text();
     QString isbn = ui->lineEditISBN->text();
     QString topics = ui->lineEditTopics->text();
-    QString description = ui->lineEditDecrtiption->text();
+    QString description = ui->textEditDescription->toPlainText();
     int year = ui->lineEditYear->text().toInt();
     int id;
     query.exec("SELECT MAX(ID) FROM Book");
@@ -53,7 +54,7 @@ void  AddBookWindow::AddBookInDB (Book& book)
     query.bindValue(":author", book.getAuthor());
     query.bindValue(":isbn", book.getIsbn());
     query.bindValue(":topics", book.getTopics());
-    query.bindValue(":description", book.getTopics());
+    query.bindValue(":description", book.getDescription());
     query.bindValue(":year", book.getYear());
     query.bindValue(":id", book.getId());
     if(!query.exec())
