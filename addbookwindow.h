@@ -20,6 +20,14 @@ private slots:
 
 private:
     Ui::AddBookWindow *ui;
+
+
+    void getData(QString& name, QString& author, QString& isbn,
+                 QString& topics, QString& description, int& year,
+                 int& id);
+    void sentDataToDB(QString& name, QString& author, QString& isbn,
+                 QString& topics, QString& description, int& year,
+                 int& id);
 };
 
 #endif // ADDBOOKWINDOW_H
