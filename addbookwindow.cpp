@@ -1,9 +1,11 @@
 #include "addbookwindow.h"
 #include "ui_addbookwindow.h"
+#include "utility.h"
 #include <QString>
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlError>
 #include <QMessageBox>
+#include <vector>
 
 AddBookWindow::AddBookWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -41,7 +43,7 @@ Book AddBookWindow::getData()
     else
         id = 0;
 
-    return Book(name, author, isbn, topics, description, year, id);
+    return Book(name, author, isbn, devideString(topics), description, year, id);
 }
 
 void  AddBookWindow::AddBookInDB (Book& book)
@@ -53,7 +55,7 @@ void  AddBookWindow::AddBookInDB (Book& book)
     query.bindValue(":name", book.getName());
     query.bindValue(":author", book.getAuthor());
     query.bindValue(":isbn", book.getIsbn());
-    query.bindValue(":topics", book.getTopics());
+    query.bindValue(":topics", splitStrings(book.getTopics()));
     query.bindValue(":description", book.getDescription());
     query.bindValue(":year", book.getYear());
     query.bindValue(":id", book.getId());

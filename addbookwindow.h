@@ -27,4 +27,7 @@ private:
     void AddBookInDB(Book& book);
 };
 
+std::vector<QString> devideString(QString str);
+QString splitStrings(std::vector<QString> strs);
+
 #endif // ADDBOOKWINDOW_H

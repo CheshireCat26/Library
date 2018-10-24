@@ -29,16 +29,21 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     addbookwindow.cpp \
-    book.cpp
+    book.cpp \
+    findbookwindow.cpp \
+    utility.cpp
 
 HEADERS += \
         mainwindow.h \
     addbookwindow.h \
-    book.h
+    book.h \
+    findbookwindow.h \
+    utility.h
 
 FORMS += \
         mainwindow.ui \
-    addbookwindow.ui
+    addbookwindow.ui \
+    findbookwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
