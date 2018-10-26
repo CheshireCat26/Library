@@ -45,10 +45,6 @@ void FindBookWindow::on_lineEditTopics_textChanged(const QString &arg1)
 void FindBookWindow::FindBookAndDisplay()
 {
     std::vector<Book> books = FindBook();
-
-    for (auto debug : books)
-        qDebug() << debug.getName() << '\n';
-
     DisplayBook(books);
 }
 

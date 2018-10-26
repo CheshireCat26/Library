@@ -27,6 +27,7 @@ std::vector<QString> devideString(QString str)
             buff.clear();
         }
     }
-
+    if (buff.size() > 0)
+        ret.push_back(buff);
     return ret;
 }

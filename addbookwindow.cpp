@@ -6,6 +6,7 @@
 #include <QtSql/QSqlError>
 #include <QMessageBox>
 #include <vector>
+#include <QDebug>
 
 AddBookWindow::AddBookWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -43,6 +44,8 @@ Book AddBookWindow::getData()
     else
         id = 0;
 
+    qDebug() << topics;
+
     return Book(name, author, isbn, devideString(topics), description, year, id);
 }
 
@@ -50,8 +53,7 @@ void  AddBookWindow::AddBookInDB (Book& book)
 {
     QSqlQuery query;
     query.prepare("INSERT INTO Book (Name, Author, ISBN, Topics, Description, Year, ID) "
-                  "VALUES (:name, :author, :isbn, :topics, "
-                  ":description, :year, :id)");
+                  "VALUES (:name, :author, :isbn, :topics, :description, :year, :id)");
     query.bindValue(":name", book.getName());
     query.bindValue(":author", book.getAuthor());
     query.bindValue(":isbn", book.getIsbn());
@@ -59,6 +61,8 @@ void  AddBookWindow::AddBookInDB (Book& book)
     query.bindValue(":description", book.getDescription());
     query.bindValue(":year", book.getYear());
     query.bindValue(":id", book.getId());
+
+
     if(!query.exec())
     {
         QSqlError error = query.lastError();
