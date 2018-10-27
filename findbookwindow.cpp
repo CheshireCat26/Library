@@ -1,10 +1,11 @@
 #include "findbookwindow.h"
 #include "ui_findbookwindow.h"
-#include "utility.h"
+#include "librarydb.h"
 #include <QtSql/QSqlQuery>
 #include <vector>
 #include "book.h"
 #include <QDebug>
+
 
 FindBookWindow::FindBookWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -44,24 +45,8 @@ void FindBookWindow::on_lineEditTopics_textChanged(const QString &arg1)
 
 void FindBookWindow::FindBookAndDisplay()
 {
-    std::vector<Book> books = FindBook();
+    std::vector<Book> books = LibraryDB::getLikeBook(searchBook);
     DisplayBook(books);
-}
-
-std::vector<Book> FindBookWindow::FindBook()
-{
-    QSqlQuery query;
-    QString quer = "SELECT * FROM Book WHERE (Name LIKE \'%"+ searchBook.getName() +"%\') AND (Author LIKE \'%" + searchBook.getAuthor() + "%\') AND (ISBN LIKE \'%"+ searchBook.getIsbn() +"%\') AND (Topics LIKE \'%"+ splitStrings(searchBook.getTopics()) +"%\')";
-    query.prepare(quer);
-    query.exec();
-    std::vector<Book> ret;
-
-    while (query.next())
-        ret.push_back(Book(query.value(0).toString(), query.value(1).toString(), query.value(2).toString(),
-                           devideString(query.value(3).toString()), query.value(4).toString(),
-                           query.value(5).toInt(), query.value(6).toInt()));
-
-    return ret;
 }
 
 void FindBookWindow::DisplayBook(std::vector<Book> b)

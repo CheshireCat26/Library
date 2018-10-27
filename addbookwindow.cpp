@@ -1,6 +1,6 @@
 #include "addbookwindow.h"
 #include "ui_addbookwindow.h"
-#include "utility.h"
+#include "librarydb.h"
 #include <QString>
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlError>
@@ -23,7 +23,7 @@ AddBookWindow::~AddBookWindow()
 void AddBookWindow::on_pushButtonAdd_clicked()
 {
     Book book = getData();
-    AddBookInDB(book);
+    LibraryDB::InsterBook(book);
     this->close();
 }
 
@@ -47,30 +47,4 @@ Book AddBookWindow::getData()
     qDebug() << topics;
 
     return Book(name, author, isbn, devideString(topics), description, year, id);
-}
-
-void  AddBookWindow::AddBookInDB (Book& book)
-{
-    QSqlQuery query;
-    query.prepare("INSERT INTO Book (Name, Author, ISBN, Topics, Description, Year, ID) "
-                  "VALUES (:name, :author, :isbn, :topics, :description, :year, :id)");
-    query.bindValue(":name", book.getName());
-    query.bindValue(":author", book.getAuthor());
-    query.bindValue(":isbn", book.getIsbn());
-    query.bindValue(":topics", splitStrings(book.getTopics()));
-    query.bindValue(":description", book.getDescription());
-    query.bindValue(":year", book.getYear());
-    query.bindValue(":id", book.getId());
-
-
-    if(!query.exec())
-    {
-        QSqlError error = query.lastError();
-        QMessageBox dbErr(QMessageBox::Critical,
-                          "Ошибка запроса",
-                          error.text(),
-                          QMessageBox::Ok);
-
-        dbErr.exec();
-    }
 }

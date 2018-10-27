@@ -21,13 +21,13 @@ public:
                      topics{Ptopics}, description{Pdescription},
                      year{Pyear}, id{Pid} {}
 
-    QString getName() { return name; }
-    QString getAuthor() { return author; }
-    QString getIsbn() { return isbn; }
-    std::vector<QString> getTopics() { return topics; }
-    QString getDescription() { return description; }
-    int getYear() { return year; }
-    int getId() { return id; }
+    QString getName() const { return name; }
+    QString getAuthor() const { return author; }
+    QString getIsbn() const { return isbn; }
+    std::vector<QString> getTopics() const { return topics; }
+    QString getDescription() const { return description; }
+    int getYear() const { return year; }
+    int getId() const { return id; }
 
     void setName(QString n) { name = n; }
     void setAuthor(QString a) { author = a; }

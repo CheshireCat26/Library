@@ -30,7 +30,6 @@ private:
     Book searchBook;
 
     void FindBookAndDisplay();
-    std::vector<Book> FindBook();
     void DisplayBook(std::vector<Book> b);
 };
 
