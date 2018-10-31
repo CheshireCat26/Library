@@ -1,12 +1,5 @@
 #include "addbookwindow.h"
 #include "ui_addbookwindow.h"
-#include "librarydb.h"
-#include <QString>
-#include <QtSql/QSqlQuery>
-#include <QtSql/QSqlError>
-#include <QMessageBox>
-#include <vector>
-#include <QDebug>
 
 AddBookWindow::AddBookWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -22,12 +15,14 @@ AddBookWindow::~AddBookWindow()
 
 void AddBookWindow::on_pushButtonAdd_clicked()
 {
-    Book book = getData();
-    LibraryDB::InsterBook(book);
+    int countIns;
+    Book book = getData(countIns);
+    LibraryDB::insertBook(book);
+    addAndShowInstences(countIns, book.getId());
     this->close();
 }
 
-Book AddBookWindow::getData()
+Book AddBookWindow::getData(int &countInst)
 {
     QSqlQuery query;
 
@@ -37,6 +32,7 @@ Book AddBookWindow::getData()
     QString topics = ui->lineEditTopics->text();
     QString description = ui->textEditDescription->toPlainText();
     int year = ui->lineEditYear->text().toInt();
+    countInst = ui->spinBox->value();
     int id;
     query.exec("SELECT MAX(ID) FROM Book");
     if (query.next())
@@ -47,4 +43,16 @@ Book AddBookWindow::getData()
     qDebug() << topics;
 
     return Book(name, author, isbn, devideString(topics), description, year, id);
+}
+
+void AddBookWindow::addAndShowInstences(int count, int bookID)
+{
+    std::vector<unsigned int> ids = LibraryDB::addInstances(bookID, count);
+    QString message = "Номера добавленных экзепляров книги: ";
+    for (auto i : ids)
+        message += '\n' + QString::number(i);
+
+    QMessageBox MB;
+    MB.setText(message);
+    MB.exec();
 }

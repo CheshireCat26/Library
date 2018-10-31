@@ -32,7 +32,7 @@ Book LibraryDB::getBook(int id)
                 query.value(5).toInt(), id);
 }
 
-void LibraryDB::InsterBook(Book& book)
+void LibraryDB::insertBook(Book& book)
 {
     QSqlQuery query;
     query.prepare("INSERT INTO Book (Name, Author, ISBN, Topics, Description, Year, ID) "
@@ -57,6 +57,29 @@ void LibraryDB::InsterBook(Book& book)
 
         dbErr.exec();
     }
+}
+
+std::vector<unsigned int> LibraryDB::addInstances(int bookID, int number)
+{
+    int count = 0;
+    std::vector<unsigned int> ids;
+    for (unsigned int i = 0; i < pow(2, 32) && count < number; i++)
+    {
+        QSqlQuery query;
+        query.exec("SELECT ID FROM Instance WHERE ID = " + QString::number(i));
+        if (query.next())
+            continue;
+
+        query.prepare("INSERT INTO Instance (ID, ID_Book) VALUES(?, ?)");
+        query.addBindValue(QString::number(i));
+        query.addBindValue(QString::number(bookID));
+        query.exec();
+
+        count++;
+        ids.push_back(i);
+    }
+
+    return ids;
 }
 
 std::vector<Book> LibraryDB::getLikeBook(Book& like)

@@ -2,7 +2,14 @@
 #define ADDBOOKWINDOW_H
 
 #include <QMainWindow>
-#include <book.h>
+#include "book.h"
+#include "librarydb.h"
+#include <QString>
+#include <QtSql/QSqlQuery>
+#include <QtSql/QSqlError>
+#include <QMessageBox>
+#include <vector>
+#include <QDebug>
 
 namespace Ui {
 class AddBookWindow;
@@ -22,7 +29,8 @@ private slots:
 private:
     Ui::AddBookWindow *ui;
 
-    Book getData();
+    Book getData(int &countInst);
+    void addAndShowInstences(int count, int bookID);
 };
 
 #endif // ADDBOOKWINDOW_H

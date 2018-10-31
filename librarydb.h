@@ -13,8 +13,8 @@ public:
     static void Connect();
     static Book getBook(int id);
     static std::vector<Book> getLikeBook(Book& like);
-    static void InsterBook(Book& book);
-
+    static void insertBook(Book& book);
+    static std::vector<unsigned int> addInstances(int bookID, int number);
 
 private:
     static QSqlDatabase db;
