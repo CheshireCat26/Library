@@ -82,13 +82,13 @@
      </item>
     </layout>
    </widget>
-   <widget class="QListWidget" name="listWidget">
+   <widget class="QTableWidget" name="tableWidget">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>40</y>
-      <width>531</width>
-      <height>371</height>
+      <x>20</x>
+      <y>50</y>
+      <width>601</width>
+      <height>391</height>
      </rect>
     </property>
    </widget>

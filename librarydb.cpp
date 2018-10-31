@@ -19,7 +19,17 @@ void LibraryDB::Connect()
                            QMessageBox::Ok);
 
          dbErr.exec();
-      }
+     }
+}
+
+Book LibraryDB::getBook(int id)
+{
+    QSqlQuery query;
+    query.exec("SELECT * FROM Book WHERE ID =" + QString::number(id));
+    query.next();
+    return Book(query.value(0).toString(), query.value(1).toString(), query.value(2).toString(),
+                devideString(query.value(3).toString()), query.value(4).toString(),
+                query.value(5).toInt(), id);
 }
 
 void LibraryDB::InsterBook(Book& book)

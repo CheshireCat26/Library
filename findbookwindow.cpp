@@ -1,10 +1,4 @@
 #include "findbookwindow.h"
-#include "ui_findbookwindow.h"
-#include "librarydb.h"
-#include <QtSql/QSqlQuery>
-#include <vector>
-#include "book.h"
-#include <QDebug>
 
 
 FindBookWindow::FindBookWindow(QWidget *parent) :
@@ -12,6 +6,8 @@ FindBookWindow::FindBookWindow(QWidget *parent) :
     ui(new Ui::FindBook)
 {
     ui->setupUi(this);
+    ui->tableWidget->setColumnCount(4);
+    ui->tableWidget->setHorizontalHeaderLabels(QStringList{"Автор", "Название", "Год издания"});
 }
 
 FindBookWindow::~FindBookWindow()
@@ -51,7 +47,25 @@ void FindBookWindow::FindBookAndDisplay()
 
 void FindBookWindow::DisplayBook(std::vector<Book> b)
 {
-    ui->listWidget->clear();
+    ui->tableWidget->clear();
+    ui->tableWidget->setRowCount(static_cast<int>(b.size()));
+    int row{0};
     for (Book i : b)
-        ui->listWidget->addItem(i.getAuthor() + ". " + i.getName());
+    {
+        ui->tableWidget->setItem(row, 0, new QTableWidgetItem(i.getAuthor()));
+        ui->tableWidget->setItem(row, 1, new QTableWidgetItem(i.getName()));
+        ui->tableWidget->setItem(row, 2, new QTableWidgetItem(QString::number(i.getYear())));
+        ui->tableWidget->setItem(row, 3, new QTableWidgetItem(QString::number(i.getId())));
+        row++;
+    }
+
+    ui->tableWidget->setHorizontalHeaderLabels(QStringList{"Автор", "Название", "Год издания"});
+}
+
+void FindBookWindow::on_tableWidget_cellDoubleClicked(int row, int column)
+{
+    QTableWidgetItem *item = ui->tableWidget->item(row, 3);
+    QString id = item->text();
+    BookWindow *BW = new BookWindow(this, item->text().toInt());
+    BW->show();
 }

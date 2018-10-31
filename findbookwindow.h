@@ -1,9 +1,17 @@
 #ifndef FINDBOOK_H
 #define FINDBOOK_H
 
+#include "bookwindow.h"
+#include "ui_findbookwindow.h"
+#include "librarydb.h"
+#include "book.h"
 #include <QMainWindow>
-#include <book.h>
 #include <vector>
+#include <QListWidgetItem>
+#include <QtSql/QSqlQuery>
+#include <QDebug>
+#include <QStringList>
+
 
 namespace Ui {
 class FindBook;
@@ -24,6 +32,8 @@ private slots:
     void on_lineEditIsbn_textChanged(const QString &arg1);
 
     void on_lineEditTopics_textChanged(const QString &arg1);
+
+    void on_tableWidget_cellDoubleClicked(int row, int column);
 
 private:
     Ui::FindBook *ui;
