@@ -17,6 +17,15 @@ void AddBookWindow::on_pushButtonAdd_clicked()
 {
     int countIns;
     Book book = getData(countIns);
+
+    if (exist(book))
+    {
+        QMessageBox MB;
+        MB.setText("Такая книга уже добавлена в БД");
+        MB.exec();
+        return;
+    }
+
     LibraryDB::insertBook(book);
     addAndShowInstences(countIns, book.getId());
     this->close();
@@ -55,4 +64,13 @@ void AddBookWindow::addAndShowInstences(int count, int bookID)
     QMessageBox MB;
     MB.setText(message);
     MB.exec();
+}
+
+bool AddBookWindow::exist(Book &book)
+{
+    std::vector<Book> b = LibraryDB::getLikeBook(book);
+    if (b.size() == 0)
+        return false;
+    else
+        return true;
 }
