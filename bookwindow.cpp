@@ -19,3 +19,9 @@ BookWindow::~BookWindow()
 {
     delete ui;
 }
+
+void BookWindow::on_pushButtonAddInstance_clicked()
+{
+    AddInstancesWindow *AIW = new AddInstancesWindow(this, book.getId());
+    AIW->show();
+}

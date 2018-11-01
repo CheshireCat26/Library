@@ -31,6 +31,7 @@ private:
 
     Book getData(int &countInst);
     void addAndShowInstences(int count, int bookID);
+    bool exist(Book& book);
 };
 
 #endif // ADDBOOKWINDOW_H

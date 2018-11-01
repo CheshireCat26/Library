@@ -32,7 +32,8 @@ SOURCES += \
     book.cpp \
     findbookwindow.cpp \
     bookwindow.cpp \
-    librarydb.cpp
+    librarydb.cpp \
+    addinstanceswindow.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -40,13 +41,15 @@ HEADERS += \
     book.h \
     findbookwindow.h \
     bookwindow.h \
-    librarydb.h
+    librarydb.h \
+    addinstanceswindow.h
 
 FORMS += \
         mainwindow.ui \
     addbookwindow.ui \
     findbookwindow.ui \
-    bookwindow.ui
+    bookwindow.ui \
+    addinstanceswindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

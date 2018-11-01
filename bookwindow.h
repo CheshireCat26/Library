@@ -3,6 +3,7 @@
 
 #include "book.h"
 #include "librarydb.h"
+#include "addinstanceswindow.h"
 #include <QMainWindow>
 #include <QString>
 
@@ -17,6 +18,9 @@ class BookWindow : public QMainWindow
 public:
     explicit BookWindow(QWidget *parent = nullptr, int bookID = -1);
     ~BookWindow();
+
+private slots:
+    void on_pushButtonAddInstance_clicked();
 
 private:
     Ui::BookWindow *ui;
