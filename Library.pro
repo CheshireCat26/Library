@@ -33,7 +33,8 @@ SOURCES += \
     findbookwindow.cpp \
     bookwindow.cpp \
     librarydb.cpp \
-    addinstanceswindow.cpp
+    addinstanceswindow.cpp \
+    reader.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -42,7 +43,8 @@ HEADERS += \
     findbookwindow.h \
     bookwindow.h \
     librarydb.h \
-    addinstanceswindow.h
+    addinstanceswindow.h \
+    reader.h
 
 FORMS += \
         mainwindow.ui \

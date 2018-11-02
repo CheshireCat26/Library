@@ -82,6 +82,31 @@ std::vector<unsigned int> LibraryDB::addInstances(int bookID, int number)
     return ids;
 }
 
+Reader LibraryDB::getReader(int id)
+{
+    QSqlQuery query;
+    query.exec("SELECT * FROM Reader WHERE ID =" + QString::number(id));
+    query.next();
+    return Reader(query.value(0).toString(), query.value(1).toString(),
+                  query.value(2).toString(), query.value(3).toString(),
+                  query.value(4).toString(), id, query.value(6).toBool());
+}
+
+void LibraryDB::insertReader(Reader &reader)
+{
+    QSqlQuery query;
+    query.prepare("INSERT INTO Reader (Name, Surname, Patronymic, [Phone number], Email, ID, Unwanted) "
+                  "VALUES (?, ?, ?, ?, ?, ?, ?)");
+    query.addBindValue(reader.getName());
+    query.addBindValue(reader.getSurname());
+    query.addBindValue(reader.getPatronymic());
+    query.addBindValue(reader.getPhoneNumber());
+    query.addBindValue(reader.getEmail());
+    query.addBindValue(reader.getId());
+    query.addBindValue(reader.getUnwanted());
+    query.exec();
+}
+
 std::vector<Book> LibraryDB::getLikeBook(Book& like)
 {
     QSqlQuery query;
