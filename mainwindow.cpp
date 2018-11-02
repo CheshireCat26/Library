@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "addbookwindow.h"
 #include "findbookwindow.h"
+#include "addreaderwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -25,4 +26,10 @@ void MainWindow::on_pushButton_clicked()
 {
     FindBookWindow *FBW = new FindBookWindow(this);
     FBW->show();
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    AddReaderWindow *ARW = new AddReaderWindow(this);
+    ARW->show();
 }

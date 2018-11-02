@@ -59,6 +59,13 @@ void LibraryDB::insertBook(Book& book)
     }
 }
 
+int LibraryDB::getNewIDBook()
+{
+    QSqlQuery query;
+    query.exec("SELECT MAX(ID) FROM Book");
+    return getNewID(query);
+}
+
 std::vector<unsigned int> LibraryDB::addInstances(int bookID, int number)
 {
     int count = 0;
@@ -82,6 +89,14 @@ std::vector<unsigned int> LibraryDB::addInstances(int bookID, int number)
     return ids;
 }
 
+int LibraryDB::getNewID(QSqlQuery &query)
+{
+    if (query.next())
+        return query.value(0).toInt() + 1;
+    else
+        return 0;
+}
+
 Reader LibraryDB::getReader(int id)
 {
     QSqlQuery query;
@@ -90,6 +105,19 @@ Reader LibraryDB::getReader(int id)
     return Reader(query.value(0).toString(), query.value(1).toString(),
                   query.value(2).toString(), query.value(3).toString(),
                   query.value(4).toString(), id, query.value(6).toBool());
+}
+
+Reader LibraryDB::getReader(QString email)
+{
+    QSqlQuery query;
+    query.exec("SELECT * FROM Reader WHERE Email LIKE \'"+ email + "\'");
+    if (query.next())
+        return Reader(query.value(0).toString(), query.value(1).toString(),
+                      query.value(2).toString(), query.value(3).toString(),
+                      email, query.value(5).toInt(), query.value(6).toBool());
+    else
+        return Reader();
+
 }
 
 void LibraryDB::insertReader(Reader &reader)
@@ -105,6 +133,13 @@ void LibraryDB::insertReader(Reader &reader)
     query.addBindValue(reader.getId());
     query.addBindValue(reader.getUnwanted());
     query.exec();
+}
+
+int LibraryDB::getNewIDReader()
+{
+    QSqlQuery query;
+    query.exec("SELECT MAX(ID) FROM Reader");
+    return getNewID(query);
 }
 
 std::vector<Book> LibraryDB::getLikeBook(Book& like)

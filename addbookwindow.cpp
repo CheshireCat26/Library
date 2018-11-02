@@ -21,7 +21,7 @@ void AddBookWindow::on_pushButtonAdd_clicked()
     if (exist(book))
     {
         QMessageBox MB;
-        MB.setText("Такая книга уже добавлена в БД");
+        MB.setText("Эта книга уже добавлена в БД");
         MB.exec();
         return;
     }
@@ -33,8 +33,6 @@ void AddBookWindow::on_pushButtonAdd_clicked()
 
 Book AddBookWindow::getData(int &countInst)
 {
-    QSqlQuery query;
-
     QString name = ui->lineEditName->text();
     QString author = ui->lineEditAuthor->text();
     QString isbn = ui->lineEditISBN->text();
@@ -42,12 +40,7 @@ Book AddBookWindow::getData(int &countInst)
     QString description = ui->textEditDescription->toPlainText();
     int year = ui->lineEditYear->text().toInt();
     countInst = ui->spinBox->value();
-    int id;
-    query.exec("SELECT MAX(ID) FROM Book");
-    if (query.next())
-        id = query.value(0).toInt() + 1;
-    else
-        id = 0;
+    int id = LibraryDB::getNewIDBook();
 
     qDebug() << topics;
 

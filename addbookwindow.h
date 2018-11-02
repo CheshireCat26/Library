@@ -5,8 +5,6 @@
 #include "book.h"
 #include "librarydb.h"
 #include <QString>
-#include <QtSql/QSqlQuery>
-#include <QtSql/QSqlError>
 #include <QMessageBox>
 #include <vector>
 #include <QDebug>
