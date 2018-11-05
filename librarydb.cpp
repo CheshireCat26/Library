@@ -101,10 +101,17 @@ Reader LibraryDB::getReader(int id)
 {
     QSqlQuery query;
     query.exec("SELECT * FROM Reader WHERE ID =" + QString::number(id));
-    query.next();
-    return Reader(query.value(0).toString(), query.value(1).toString(),
-                  query.value(2).toString(), query.value(3).toString(),
-                  query.value(4).toString(), id, query.value(6).toBool());
+    if(query.next())
+    {
+        return Reader(query.value(0).toString(), query.value(1).toString(),
+                      query.value(2).toString(), query.value(3).toString(),
+                      query.value(4).toString(), id, query.value(6).toBool());
+    }
+    else
+    {
+        return Reader();
+    }
+
 }
 
 Reader LibraryDB::getReader(QString email)
@@ -126,7 +133,7 @@ void LibraryDB::insertReader(Reader &reader)
     query.prepare("INSERT INTO Reader (Name, Surname, Patronymic, [Phone number], Email, ID, Unwanted) "
                   "VALUES (?, ?, ?, ?, ?, ?, ?)");
     query.addBindValue(reader.getName());
-    query.addBindValue(reader.getSurname());
+    query.addBindValue(reader.getSurName());
     query.addBindValue(reader.getPatronymic());
     query.addBindValue(reader.getPhoneNumber());
     query.addBindValue(reader.getEmail());

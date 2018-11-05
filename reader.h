@@ -24,7 +24,7 @@ public:
     {}
 
     QString getName() { return name; }
-    QString getSurname() { return surname; }
+    QString getSurName() { return surname; }
     QString getPatronymic() { return patronymic; }
     QString getPhoneNumber() { return phoneNumber; }
     QString getEmail() { return email; }
