@@ -2,6 +2,7 @@
 #define ADDREADERWINDOW_H
 
 #include <QMainWindow>
+#include <QMessageBox>
 #include "reader.h"
 #include "librarydb.h"
 

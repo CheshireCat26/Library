@@ -18,6 +18,12 @@ void AddReaderWindow::on_pushButton_clicked()
     Reader addReader = getDate();
     if (!exist(addReader))
         LibraryDB::insertReader(addReader);
+    else
+    {
+        QMessageBox errbox;
+        errbox.setText("Уже существует читатель с данным email");
+        errbox.exec();
+    }
     this->close();
 }
 
