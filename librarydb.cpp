@@ -4,6 +4,7 @@
 #include <QtSql/QSqlError>
 #include <QString>
 #include <QVariant>
+#include "QDebug"
 
 QSqlDatabase LibraryDB::db = QSqlDatabase::addDatabase("QODBC");
 
@@ -147,6 +148,27 @@ int LibraryDB::getNewIDReader()
     QSqlQuery query;
     query.exec("SELECT MAX(ID) FROM Reader");
     return getNewID(query);
+}
+
+int LibraryDB::getFreeInstatnce(int idBook)
+{
+    QSqlQuery query;
+    query.exec("SELECT ID FROM Instance WHERE ID_Book = " + QString::number(idBook) +" AND ID_Reader IS NULL ");
+    if (query.next())
+    {
+        return query.value(0).toInt();
+    }
+    else
+        return -1;
+}
+
+void LibraryDB::giveBook(int idInstance, int idReader, QDate dateReturn)
+{
+    QSqlQuery query;
+    query.exec("UPDATE Instance SET ID_Reader=" + QString::number(idReader) +
+               ",[Date Issue]=\'" + QDate::currentDate().toString("dd.MM.yyyy") +
+               "\',[Date Return]=\'" + dateReturn.toString("dd.MM.yyyy") +
+               "\'WHERE ID=" + QString::number(idInstance));
 }
 
 std::vector<Book> LibraryDB::getLikeBook(Book& like)

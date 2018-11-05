@@ -53,7 +53,7 @@
      <string>Нежелательный</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -71,7 +71,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="labelLastName">
+      <widget class="QLabel" name="labelSurName">
        <property name="text">
         <string>Фамилия:</string>
        </property>

@@ -5,7 +5,7 @@
 #include "reader.h"
 #include <vector>
 #include <QtSql/QSqlDatabase>
-
+#include <QDate>
 
 
 class LibraryDB
@@ -25,6 +25,9 @@ public:
     static Reader getReader(QString email);
     static void insertReader(Reader& reader);
     static int getNewIDReader();
+
+    static int getFreeInstatnce (int idBook);
+    static void giveBook(int idInstance, int idReader, QDate dateReturn);
 
 private:
     static QSqlDatabase db;

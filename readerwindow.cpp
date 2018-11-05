@@ -8,7 +8,7 @@ ReaderWindow::ReaderWindow(Reader pReader, QWidget *parent) :
 {
     ui->setupUi(this);
     ui->labelName->setText("Имя: " + reader.getName());
-    ui->labeSurName->setText("Фамилия: " + reader.getSurName());
+    ui->labelSurName->setText("Фамилия: " + reader.getSurName());
     ui->labelPatronymic->setText("Отчество: " + reader.getPatronymic());
     ui->labelPhoneNumber->setText("Номер телефона: " + reader.getPhoneNumber());
     ui->labelEmail->setText("Email: " + reader.getEmail());

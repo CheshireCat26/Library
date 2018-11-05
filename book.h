@@ -14,7 +14,7 @@ class Book
     int year;
     int id;
 public:
-    Book() : year{0}, id{0} {}
+    Book() : year{0}, id{-1} {}
     Book (QString Pname, QString Pauthor, QString Pisbn,
           std::vector<QString> Ptopics, QString Pdescription, int Pyear,
           int Pid) : name{Pname}, author{Pauthor}, isbn{Pisbn},

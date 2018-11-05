@@ -37,7 +37,8 @@ SOURCES += \
     reader.cpp \
     addreaderwindow.cpp \
     findreaderwindow.cpp \
-    readerwindow.cpp
+    readerwindow.cpp \
+    givebookwindow.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -50,7 +51,8 @@ HEADERS += \
     reader.h \
     addreaderwindow.h \
     findreaderwindow.h \
-    readerwindow.h
+    readerwindow.h \
+    givebookwindow.h
 
 FORMS += \
         mainwindow.ui \
@@ -60,7 +62,8 @@ FORMS += \
     addinstanceswindow.ui \
     addreaderwindow.ui \
     findreaderwindow.ui \
-    readerwindow.ui
+    readerwindow.ui \
+    givebookwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
