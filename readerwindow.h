@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "reader.h"
+#include "returnbookwindow.h"
 
 namespace Ui {
 class ReaderWindow;
@@ -15,6 +16,9 @@ class ReaderWindow : public QMainWindow
 public:
     explicit ReaderWindow(Reader pReader, QWidget *parent = nullptr);
     ~ReaderWindow();
+
+private slots:
+    void on_pushButton_2_clicked();
 
 private:
     Ui::ReaderWindow *ui;

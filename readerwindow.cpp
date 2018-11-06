@@ -18,3 +18,9 @@ ReaderWindow::~ReaderWindow()
 {
     delete ui;
 }
+
+void ReaderWindow::on_pushButton_2_clicked()
+{
+    ReturnBookWindow *RBW = new ReturnBookWindow(reader.getId(), this);
+    RBW->show();
+}

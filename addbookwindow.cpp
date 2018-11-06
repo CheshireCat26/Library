@@ -20,9 +20,7 @@ void AddBookWindow::on_pushButtonAdd_clicked()
 
     if (exist(book))
     {
-        QMessageBox MB;
-        MB.setText("Эта книга уже добавлена в БД");
-        MB.exec();
+        showMessage("Эта книга уже добавлена в БД");
         return;
     }
 
@@ -54,9 +52,7 @@ void AddBookWindow::addAndShowInstences(int count, int bookID)
     for (auto i : ids)
         message += '\n' + QString::number(i);
 
-    QMessageBox MB;
-    MB.setText(message);
-    MB.exec();
+    showMessage(message);
 }
 
 bool AddBookWindow::exist(Book &book)

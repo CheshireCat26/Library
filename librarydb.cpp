@@ -166,9 +166,27 @@ void LibraryDB::giveBook(int idInstance, int idReader, QDate dateReturn)
 {
     QSqlQuery query;
     query.exec("UPDATE Instance SET ID_Reader=" + QString::number(idReader) +
-               ",[Date Issue]=\'" + QDate::currentDate().toString("dd.MM.yyyy") +
-               "\',[Date Return]=\'" + dateReturn.toString("dd.MM.yyyy") +
+               ",[Date give]=\'" + QDate::currentDate().toString("dd.MM.yyyy") +
+               "\',[Date return]=\'" + dateReturn.toString("dd.MM.yyyy") +
                "\'WHERE ID=" + QString::number(idInstance));
+}
+
+std::vector<int> LibraryDB::getIdTakenBook(int idReader)
+{
+    QSqlQuery query;
+    query.exec("SELECT ID FROM Instance WHERE ID_Reader=" + QString::number(idReader));
+
+    std::vector<int> ids;
+    while(query.next())
+        ids.push_back(query.value(0).toInt());
+
+    return ids;
+}
+
+void LibraryDB::returnBook(int idInstance)
+{
+    QSqlQuery query;
+    query.exec("UPDATE Instance SET ID_Reader=NULL,[Date give]=NULL,[Date return]=NULL WHERE ID=" + QString::number(idInstance));
 }
 
 std::vector<Book> LibraryDB::getLikeBook(Book& like)
@@ -219,4 +237,11 @@ std::vector<QString> devideString(QString str)
         ret.push_back(buff);
 
     return ret;
+}
+
+void showMessage(QString message)
+{
+    QMessageBox MB;
+    MB.setText(message);
+    MB.exec();
 }

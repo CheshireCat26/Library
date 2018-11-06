@@ -6,7 +6,7 @@
 #include <vector>
 #include <QtSql/QSqlDatabase>
 #include <QDate>
-
+#include <QMessageBox>
 
 class LibraryDB
 {
@@ -28,6 +28,8 @@ public:
 
     static int getFreeInstatnce (int idBook);
     static void giveBook(int idInstance, int idReader, QDate dateReturn);
+    static std::vector<int> getIdTakenBook(int idReader);
+    static void returnBook(int idInstance);
 
 private:
     static QSqlDatabase db;
@@ -36,5 +38,6 @@ private:
 
 QString splitStrings(std::vector<QString> strs);
 std::vector<QString> devideString(QString str);
+void showMessage(QString message);
 
 #endif // LIBRARYDB_H

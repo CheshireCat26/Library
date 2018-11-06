@@ -27,23 +27,12 @@ void GiveBookWindow::on_pushButton_clicked()
         if (idInstance != -1)
         {
             LibraryDB::giveBook(idInstance, idReader, date);
-
-            QMessageBox SM;
-            SM.setText("Книга успешно выдана\n ID выданного экземпляра: "
-                       + QString::number(idInstance));
-            SM.exec();
+            showMessage("Книга успешно выдана\n ID выданного экземпляра: "
+                        + QString::number(idInstance));
         }
         else
-        {
-            QMessageBox EM;
-            EM.setText("Нет свободного экземпляра книги");
-            EM.exec();
-        }
+            showMessage("Нет свободного экземпляра книги");
     }
     else
-    {
-        QMessageBox EM;
-        EM.setText("Не найдено читателя с данным ID");
-        EM.exec();
-    }
+        showMessage("Не найдено читателя с данным ID");
 }

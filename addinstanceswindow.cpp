@@ -17,10 +17,9 @@ void AddInstancesWindow::on_pushButton_clicked()
 {
     std::vector<unsigned int> ids = LibraryDB::addInstances(idBook, ui->spinBox->value());
 
-    QMessageBox MB;
+
     QString mess = "ID добавленных экземпляров: ";
     for (auto i : ids)
         mess += "\n" + QString::number(i);
-    MB.setText(mess);
-    MB.exec();
+    showMessage(mess);
 }
