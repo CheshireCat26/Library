@@ -5,6 +5,7 @@
 #include "librarydb.h"
 #include "addinstanceswindow.h"
 #include "givebookwindow.h"
+#include "deleteinstanceswindow.h"
 #include <QMainWindow>
 #include <QString>
 
@@ -24,6 +25,8 @@ private slots:
     void on_pushButtonAddInstance_clicked();
 
     void on_pushButtonGiveBook_clicked();
+
+    void on_pushButton_2_clicked();
 
 private:
     Ui::BookWindow *ui;

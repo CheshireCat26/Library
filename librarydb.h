@@ -28,8 +28,10 @@ public:
 
     static int getFreeInstatnce (int idBook);
     static void giveBook(int idInstance, int idReader, QDate dateReturn);
-    static std::vector<int> getIdTakenBook(int idReader);
+    static std::vector<int> getIdTakenInstances(int idReader);
     static void returnBook(int idInstance);
+    static std::vector<int> getIdInstancesBook(int idBook);
+    static void deleteInstance(int idInstance);
 
 private:
     static QSqlDatabase db;

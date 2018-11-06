@@ -31,3 +31,9 @@ void BookWindow::on_pushButtonGiveBook_clicked()
     GiveBookWindow *GBW = new GiveBookWindow(book.getId(), this);
     GBW->show();
 }
+
+void BookWindow::on_pushButton_2_clicked()
+{
+    DeleteInstancesWindow *DIW = new DeleteInstancesWindow(book.getId(), this);
+    DIW->show();
+}

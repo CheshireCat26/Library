@@ -25,7 +25,7 @@ void ReturnBookWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 
 void ReturnBookWindow::fillList()
 {
-    std::vector<int> ids = LibraryDB::getIdTakenBook(idReader);
+    std::vector<int> ids = LibraryDB::getIdTakenInstances(idReader);
     for (int i : ids)
     {
         ui->listWidget->addItem(QString::number(i));

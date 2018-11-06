@@ -171,7 +171,7 @@ void LibraryDB::giveBook(int idInstance, int idReader, QDate dateReturn)
                "\'WHERE ID=" + QString::number(idInstance));
 }
 
-std::vector<int> LibraryDB::getIdTakenBook(int idReader)
+std::vector<int> LibraryDB::getIdTakenInstances(int idReader)
 {
     QSqlQuery query;
     query.exec("SELECT ID FROM Instance WHERE ID_Reader=" + QString::number(idReader));
@@ -187,6 +187,24 @@ void LibraryDB::returnBook(int idInstance)
 {
     QSqlQuery query;
     query.exec("UPDATE Instance SET ID_Reader=NULL,[Date give]=NULL,[Date return]=NULL WHERE ID=" + QString::number(idInstance));
+}
+
+std::vector<int> LibraryDB::getIdInstancesBook(int idBook)
+{
+    QSqlQuery query;
+    query.exec("SELECT ID FROM Instance WHERE ID_Book=" + QString::number(idBook));
+
+    std::vector<int> ids;
+    while(query.next())
+        ids.push_back(query.value(0).toInt());
+
+    return ids;
+}
+
+void LibraryDB::deleteInstance(int idInstance)
+{
+    QSqlQuery query;
+    query.exec("DELETE FROM Instance WHERE ID=" + QString::number(idInstance));
 }
 
 std::vector<Book> LibraryDB::getLikeBook(Book& like)
