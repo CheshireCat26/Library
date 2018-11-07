@@ -17,7 +17,10 @@ void AddReaderWindow::on_pushButton_clicked()
 {
     Reader addReader = getDate();
     if (!exist(addReader))
+    {
         LibraryDB::insertReader(addReader);
+        showMessage("ID нового читателя: " + QString::number(addReader.getId()));
+    }
     else
         showMessage("Уже существует читатель с данным email");
 

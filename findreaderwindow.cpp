@@ -18,6 +18,11 @@ void FindReaderWindow::on_pushButton_clicked()
     int id = ui->lineEdit->text().toInt();
     Reader reader = LibraryDB::getReader(id);
 
-    ReaderWindow *RW = new ReaderWindow(reader, this);
-    RW->show();
+    if(reader.getId() != -1)
+    {
+        ReaderWindow *RW = new ReaderWindow(reader, this);
+        RW->show();
+    }
+    else
+        showMessage("Читатель не найден");
 }

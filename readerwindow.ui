@@ -40,19 +40,6 @@
      <string>Забрать книгу</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox">
-    <property name="geometry">
-     <rect>
-      <x>450</x>
-      <y>430</y>
-      <width>111</width>
-      <height>19</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Нежелательный</string>
-    </property>
-   </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
@@ -99,6 +86,32 @@
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QLabel" name="labelUnwanted">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>160</y>
+      <width>571</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButtonUnwanted">
+    <property name="geometry">
+     <rect>
+      <x>423</x>
+      <y>420</y>
+      <width>111</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Нежелательный</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

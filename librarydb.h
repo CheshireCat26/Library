@@ -17,21 +17,26 @@ public:
     static std::vector<Book> getLikeBook(Book& like);
     static void insertBook(Book& book);
     static int getNewIDBook();
+    static void deleteBook(int idBook);
+    static void giveBook(int idInstance, int idReader, QDate dateReturn);
+    static void returnBook(int idInstance);
+    static void deleteReader(int idReader);
+    static void freeAllInstances(int idReader);
 
-    static std::vector<unsigned int> addInstances(int bookID, int number);
     static int getNewID(QSqlQuery& query);
 
     static Reader getReader(int id);
     static Reader getReader(QString email);
     static void insertReader(Reader& reader);
     static int getNewIDReader();
+    static void changeUnwanted(int idReader);
 
     static int getFreeInstatnce (int idBook);
-    static void giveBook(int idInstance, int idReader, QDate dateReturn);
     static std::vector<int> getIdTakenInstances(int idReader);
-    static void returnBook(int idInstance);
     static std::vector<int> getIdInstancesBook(int idBook);
     static void deleteInstance(int idInstance);
+    static void deleteAllBookInstances(int idBook);
+    static std::vector<unsigned int> addInstances(int bookID, int number);
 
 private:
     static QSqlDatabase db;

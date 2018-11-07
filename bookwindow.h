@@ -28,6 +28,8 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_pushButtonDeleteBook_clicked();
+
 private:
     Ui::BookWindow *ui;
     Book book;

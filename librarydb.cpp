@@ -150,6 +150,24 @@ int LibraryDB::getNewIDReader()
     return getNewID(query);
 }
 
+void LibraryDB::changeUnwanted(int idReader)
+{
+    QSqlQuery query;
+    Reader reader = getReader(idReader);
+    if (reader.getUnwanted())
+        query.exec("UPDATE Reader SET Unwanted=0");
+    else
+       query.exec("UPDATE Reader SET Unwanted=1");
+}
+
+void LibraryDB::deleteBook(int idBook)
+{
+    deleteAllBookInstances(idBook);
+
+    QSqlQuery query;
+    query.exec("DELETE FROM Book WHERE ID=" + QString::number(idBook));
+}
+
 int LibraryDB::getFreeInstatnce(int idBook)
 {
     QSqlQuery query;
@@ -189,6 +207,20 @@ void LibraryDB::returnBook(int idInstance)
     query.exec("UPDATE Instance SET ID_Reader=NULL,[Date give]=NULL,[Date return]=NULL WHERE ID=" + QString::number(idInstance));
 }
 
+void LibraryDB::deleteReader(int idReader)
+{
+    freeAllInstances(idReader);
+
+    QSqlQuery query;
+    query.exec("DELETE FROM Reader WHERE ID=" + QString::number(idReader));
+}
+
+void LibraryDB::freeAllInstances(int idReader)
+{
+    QSqlQuery query;
+    query.exec("UPDATE Instance SET ID_Reader=NULL,[Date give]=NULL,[Date return]=NULL WHERE ID_Reader=" + QString::number(idReader));
+}
+
 std::vector<int> LibraryDB::getIdInstancesBook(int idBook)
 {
     QSqlQuery query;
@@ -205,6 +237,12 @@ void LibraryDB::deleteInstance(int idInstance)
 {
     QSqlQuery query;
     query.exec("DELETE FROM Instance WHERE ID=" + QString::number(idInstance));
+}
+
+void LibraryDB::deleteAllBookInstances(int idBook)
+{
+    QSqlQuery query;
+    query.exec("DELETE FROM Instance WHERE ID_Book=" + QString::number(idBook));
 }
 
 std::vector<Book> LibraryDB::getLikeBook(Book& like)

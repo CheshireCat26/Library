@@ -37,3 +37,10 @@ void BookWindow::on_pushButton_2_clicked()
     DeleteInstancesWindow *DIW = new DeleteInstancesWindow(book.getId(), this);
     DIW->show();
 }
+
+void BookWindow::on_pushButtonDeleteBook_clicked()
+{
+    LibraryDB::deleteBook(book.getId());
+    showMessage("Книга успешно удалена");
+    this->close();
+}
